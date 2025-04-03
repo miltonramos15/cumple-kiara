@@ -18,21 +18,19 @@ body {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
     z-index: -1;
+    filter: brightness(0.9) contrast(1.1) grayscale(100%);
 }
 
 .collage img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s;
-    /* Filtro para mostrar las imágenes en blanco y negro */
-    filter: grayscale(100%);
+    transition: transform 0.5s ease, filter 0.5s ease;
+    will-change: transform, filter;
 }
 
 .collage img:hover {
     transform: scale(1.05);
-    /* Opcional: quitar el filtro al pasar el mouse por encima */
-    filter: grayscale(0%);
 }
 
 .mensaje {
@@ -40,14 +38,17 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 48px;
+    font-size: clamp(2rem, 5vw, 4rem);
     color: #fff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     text-align: center;
     background-color: rgba(0, 0, 0, 0.3);
-    padding: 20px;
+    padding: clamp(1rem, 3vw, 2rem);
     border-radius: 10px;
-    animation: pulsate 2s infinite;
+    animation: pulsate 2s infinite ease-in-out;
+    min-width: 90%;
+    max-width: 90%;
+    box-sizing: border-box;
 }
 
 @keyframes pulsate {
@@ -61,20 +62,23 @@ body {
     top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 15px 30px;
-    font-size: 24px;
+    padding: clamp(1rem, 3vw, 1.5rem) clamp(2rem, 6vw, 3rem);
+    font-size: clamp(1.5rem, 4vw, 2rem);
     background-color: #ff6b6b;
     color: #fff;
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    min-width: 80%;
+    max-width: 80%;
+    box-sizing: border-box;
 }
 
 .boton:hover {
     background-color: #ff4757;
-    transform: translate(-50%, -50%) scale(1.1);
+    transform: scale(1.1);
 }
 
 /* Estilos para la carta (carta.html) */
@@ -89,46 +93,50 @@ body {
 .carta {
     background-color: #fff;
     border: 1px solid #ddd;
-    padding: 30px;
-    max-width: 700px;
+    padding: clamp(1rem, 3vw, 2rem);
+    max-width: 90vw;
     margin: 0 auto;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
     position: relative;
-    animation: fadeIn 1.5s;
+    animation: fadeIn 1.5s ease-out;
+    min-height: 80vh;
 }
 
 .carta h1 {
     color: #ff6b6b;
-    margin-bottom: 20px;
+    margin-bottom: clamp(1rem, 3vw, 2rem);
+    font-size: clamp(2rem, 5vw, 3rem);
 }
 
 .carta p {
-    font-size: 22px;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
     line-height: 1.6;
-    margin-bottom: 20px;
+    margin-bottom: clamp(1rem, 3vw, 2rem);
     color: #333;
 }
 
 .firma {
-    font-size: 24px;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
     font-weight: bold;
     color: #ff6b6b;
     text-align: right;
-    margin-top: 30px;
+    margin-top: clamp(1.5rem, 4vw, 3rem);
 }
 
 .boton-volver {
-    padding: 10px 20px;
-    font-size: 18px;
+    padding: clamp(0.8rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2rem);
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
     background-color: #ff6b6b;
     color: #fff;
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     display: block;
-    margin: 30px auto 0;
+    margin: clamp(1.5rem, 4vw, 3rem) auto 0;
+    width: 80%;
+    max-width: 300px;
 }
 
 .boton-volver:hover {
@@ -136,8 +144,48 @@ body {
     transform: scale(1.1);
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+/* Media queries para asegurar la compatibilidad con todos los dispositivos */
+@media (max-width: 640px) {
+    .mensaje {
+        font-size: clamp(1.5rem, 5vw, 3rem);
+        padding: clamp(1rem, 4vw, 2rem);
+    }
+    
+    .boton {
+        padding: clamp(1rem, 4vw, 1.5rem) clamp(2rem, 8vw, 3rem);
+        font-size: clamp(1.2rem, 4vw, 1.8rem);
+    }
+    
+    .carta {
+        padding: clamp(1rem, 4vw, 2rem);
+    }
+    
+    .carta h1 {
+        font-size: clamp(1.5rem, 6vw, 2.5rem);
+    }
+    
+    .carta p {
+        font-size: clamp(1rem, 3vw, 1.3rem);
+    }
+    
+    .firma {
+        font-size: clamp(1rem, 3vw, 1.3rem);
+        margin-top: clamp(1.5rem, 5vw, 2.5rem);
+    }
+    
+    .boton-volver {
+        padding: clamp(0.8rem, 3vw, 1.2rem) clamp(1.5rem, 6vw, 2rem);
+        font-size: clamp(1rem, 3vw, 1.2rem);
+    }
 }
 
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
