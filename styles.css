@@ -25,10 +25,14 @@ body {
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s;
+    /* Filtro para mostrar las imágenes en blanco y negro */
+    filter: grayscale(100%);
 }
 
 .collage img:hover {
     transform: scale(1.05);
+    /* Opcional: quitar el filtro al pasar el mouse por encima */
+    filter: grayscale(0%);
 }
 
 .mensaje {
@@ -136,3 +140,4 @@ body {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
